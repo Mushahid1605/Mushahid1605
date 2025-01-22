@@ -1,0 +1,47 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+# Initialize the Chrome driver (Make sure you have the ChromeDriver installed and in your PATH)
+driver = webdriver.Chrome()
+
+try:
+    # Open the login page
+    driver.get("http://clarity.advantagesb.com")
+
+    # Allow the page to load
+    time.sleep(2)
+
+    # Find the username and password fields and enter the credentials
+    username_field = driver.find_element(By.NAME, "username")  # Adjust if necessary
+    password_field = driver.find_element(By.NAME, "password")  # Adjust if necessary
+
+    username_field.send_keys("7021889883")
+    password_field.send_keys("qwerty121")
+
+    # Submit the form
+    password_field.send_keys(Keys.RETURN)
+
+    # Allow time to log in
+    time.sleep(5)
+
+  # Navigate directly to the Material Request page
+    driver.get("http://clarity.advantagesb.com/inventory/materialRequest.php")
+
+    # Allow the Material Request page to load
+    time.sleep(5)
+
+    atm_id_field = driver.find_element(By.ID, "searchatmid")
+    atm_id_field.send_keys("S1NW006240142")
+
+    # Find and click the Filter button
+    filter_button = driver.find_element(By.CSS_SELECTOR, "input[name='submit'][value='Filter']")
+    filter_button.click()
+
+    # Allow time to process the filter action
+    time.sleep(5)
+
+finally:
+    # Close the browser
+    driver.quit()
